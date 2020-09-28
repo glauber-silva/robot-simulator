@@ -9,10 +9,19 @@ defmodule RobotSimulator do
 
   Valid directions are: `:north`, `:east`, `:south`, `:west`
   """
-  def create(direction, position) do
+  def create(direction \\ :north, position \\ {0,0}) do
     with :ok <- valid_direction(direction),
          :ok <- valid_position(position),
-    do: %{direction: direction, position: position}
+    do: %RobotSimulator{direction: direction, position: position}
+  end
+
+
+  def position(robot) do
+    robot.position
+  end
+
+  def direction(robot) do
+    robot.direction
   end
 
   defp valid_direction(direction) when direction in @valid_directions, do: :ok
