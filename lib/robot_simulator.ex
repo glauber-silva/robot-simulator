@@ -24,11 +24,11 @@ defmodule RobotSimulator do
   def simulate(robot, instructions) do
     instructions
     |> String.graphemes()
-    |> do_move(robot)
+    |> Enum.reduce(robot, &do_move/2)
   end
 
-  def do_move(instructions, robot) do
-
+  defp do_move(instruction, robot) do
+    {instruction, robot}
   end
 
 
