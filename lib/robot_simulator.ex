@@ -16,10 +16,32 @@ defmodule RobotSimulator do
   end
 
 
+  @doc """
+  Simulate the robot's execute_instructionment given a string of instructions.
+
+  Valid instructions are: "R" (turn right), "L", (turn left), and "A" (advance)
+  """
+  def simulate(robot, instructions) do
+    instructions
+    |> String.graphemes()
+    |> do_move(robot)
+  end
+
+  def do_move(instructions, robot) do
+
+  end
+
+
+  @doc """
+  show robot's position
+  """
   def position(robot) do
     robot.position
   end
 
+  @doc """
+  show robot's direction
+  """
   def direction(robot) do
     robot.direction
   end
