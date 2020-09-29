@@ -27,9 +27,22 @@ defmodule RobotSimulator do
     |> Enum.reduce(robot, &do_move/2)
   end
 
-  defp do_move(instruction, robot) do
-    {instruction, robot}
-  end
+  defp do_move("A", %{position: {x, y}, direction: :north} = robot), do: %{robot | position: { x, y + 1 }}
+  defp do_move("A", %{position: {x, y}, direction: :south} = robot), do: %{robot | position: { x, y - 1 }}
+  defp do_move("A", %{position: {x, y}, direction: :east } = robot), do: %{robot | position: { x + 1, y }}
+  defp do_move("A", %{position: {x, y}, direction: :west } = robot), do: %{robot | position: { x - 1, y }}
+
+  defp do_move("L", %{direction: :north} = robot), do: %{robot | direction: :west }
+  defp do_move("L", %{direction: :south} = robot), do: %{robot | direction: :east }
+  defp do_move("L", %{direction: :east } = robot), do: %{robot | direction: :north}
+  defp do_move("L", %{direction: :west } = robot), do: %{robot | direction: :south}
+
+  defp do_move("R", %{direction: :north} = robot), do: %{robot | direction: :east }
+  defp do_move("R", %{direction: :south} = robot), do: %{robot | direction: :west }
+  defp do_move("R", %{direction: :east } = robot), do: %{robot | direction: :south}
+  defp do_move("R", %{direction: :west } = robot), do: %{robot | direction: :north}
+
+  defp do_move(_, _), do: {:error, "invalid instruction"}
 
 
   @doc """
